@@ -19,5 +19,14 @@ jobs:
           
       - name: Run Public Tests
         run: |
-          # Tests automatically skip if SUBMIT = False in solution.py
-          PYTHONPATH=. pytest tests/
+          # Tests automatically skip if SUBMIT = False in solution.py.
+          # Exit code 5 means "No tests were collected", which is expected if all are skipped.
+          PYTHONPATH=. pytest tests/ || {
+            EXIT_CODE=$?
+            if [ $EXIT_CODE -eq 5 ]; then
+              echo "All tests were skipped (SUBMIT=False). This is acceptable."
+              exit 0
+            else
+              exit $EXIT_CODE
+            fi
+          }
