@@ -24,3 +24,4 @@ make test
 - `tests/`: Contains public sanity checks for each exercise.
 - `makefile`: Tools to help you develop locally.
 # Trigger Fix
+# Trigger Sync
